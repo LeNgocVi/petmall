@@ -54,7 +54,12 @@ const HotProduct = () => {
                         </a>
                       </h3>
                       <div className="box-pro-prices">
-                        <span className="pro-price"> {note.price}</span>
+                        <span className="pro-price">
+                          {new Intl.NumberFormat("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          }).format(note.price)}{" "}
+                        </span>
                       </div>
                     </div>
                   </div>
