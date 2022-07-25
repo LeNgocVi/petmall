@@ -1,5 +1,5 @@
 import React from "react";
-
+import dropdown from "../../assets/image/drop-down.svg";
 const HeaderMenu = () => {
   return (
     <div className="header-menu-desktop">
@@ -21,7 +21,7 @@ const HeaderMenu = () => {
                         ></i> --> */}
                     <img
                       className="icon--arrow-bottom"
-                      src="./assets/image/drop-down.svg"
+                      src={dropdown}
                       alt=""
                     ></img>
                   </a>
@@ -93,7 +93,7 @@ const HeaderMenu = () => {
                     CỦA CHÓ | DOG
                     <img
                       className="icon--arrow-bottom"
-                      src="./assets/image/drop-down.svg"
+                      src={dropdown}
                       alt=""
                     ></img>
                   </a>
@@ -103,7 +103,7 @@ const HeaderMenu = () => {
                     THÚ NHỎ | Small Pet
                     <img
                       className="icon--arrow-bottom"
-                      src="./assets/image/drop-down.svg"
+                      src={dropdown}
                       alt=""
                     ></img>
                   </a>
