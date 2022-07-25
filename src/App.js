@@ -1,24 +1,23 @@
 import "./App.css";
-import Banner from "./components/Banner";
-import BlogHome from "./components/BlogHome";
+import React, { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Contact from "./components/contact.js/Contact";
 import Footer from "./components/footer/Footer";
-import Index from "./components/header/Index";
-import HomeSlide from "./components/HomeSlide";
-import HotProduct from "./components/HotProduct";
-import Patner from "./components/Patner";
-import Promotion from "./components/Promotion";
+import Header from "./components/header/Index";
+import Home from "./pages/Home";
+import NotFound from "./pages/NotFound";
+import SignUp from "./pages/SignUp";
+
 function App() {
   return (
     <div className="App">
-      <Index />
+      <Header />
       <main className="mainContent-theme main-index">
-        <HomeSlide />
-        <Banner />
-        <HotProduct />
-        <Patner />
-        <Promotion />
-        <BlogHome />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Contact />
       <Footer />

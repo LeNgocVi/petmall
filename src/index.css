@@ -86,6 +86,50 @@ body {
   margin-bottom: 0.5rem !important;
 }
 
+.pb-4,
+.py-4 {
+  padding-bottom: 1.5rem !important;
+}
+
+.mr-4 {
+  margin-right: 1.5rem !important;
+}
+
+.mb-4,
+.my-4 {
+  margin-bottom: 1.5rem !important;
+}
+
+.m-auto {
+  margin: auto !important;
+}
+
+.mb-5,
+.my-5 {
+  margin-bottom: 3rem !important;
+}
+
+.mt-5,
+.my-5 {
+  margin-top: 3rem !important;
+}
+
+.font-weight-bold {
+  font-weight: 700 !important;
+}
+
+.font-weight-normal {
+  font-weight: 400 !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.d-block {
+  display: block !important;
+}
+
 img {
   max-width: 100%;
   vertical-align: middle;
@@ -1579,4 +1623,80 @@ a:focus {
   right: 30px;
   width: 60px;
   ;
+}
+
+/* sign up */
+.wrapbox-content-account .userbox {
+  max-width: 500px;
+  padding: 70px 65px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.wrapbox-content-account .userbox label.text-field {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #000;
+}
+
+
+
+.form-control {
+  display: block;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.form-control {
+  height: initial;
+  font-size: 14px;
+  color: #333333;
+  background: transparent;
+  border: 1px solid #ebeded;
+  padding: 10px 15px;
+  -webkit-appearance: none;
+}
+
+.wrapbox-content-account .userbox .form-control {
+  background: #f3f5f6;
+  border-radius: 0;
+  color: #000;
+
+}
+
+#grender-group input[type="radio"]+label {
+  position: relative;
+  cursor: pointer;
+  padding-left: 28px;
+  margin: 10px 20px 5px 0;
+}
+
+.sitebox-recaptcha {
+  padding: 0;
+  color: #898989;
+  text-align: left;
+  font-size: 13px;
+  clear: both;
+}
+
+.sitebox-recaptcha a {
+  color: #2962ff;
+}
+
+.wrapbox-content-account .action-button .btn {
+  width: 100%;
+  padding: 15px 20px;
+  font-weight: 600;
 }
