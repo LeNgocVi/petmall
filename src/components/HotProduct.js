@@ -18,7 +18,6 @@ const HotProduct = () => {
       })
       .then(() => {
         setData(a);
-        // console.log(a);
       });
   }, []);
   return (
