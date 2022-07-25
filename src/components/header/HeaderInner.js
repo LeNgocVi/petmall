@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import iconsearch from "../../assets/image/icon-search.svg";
 import searchbtn from "../../assets/image/search-btn.svg";
 import iconaccount from "../../assets/image/icon-account.svg";
@@ -127,9 +128,9 @@ const HeaderInner = () => {
                           <div className="popover-secondary-action">
                             <p className="mb-2">
                               Khách hàng mới?{" "}
-                              <a href="" className="link">
+                              <Link to="/signup" className="link">
                                 Tạo tài khoản
-                              </a>
+                              </Link>
                             </p>
                             <p className="mb-0">
                               Quên mật khẩu?{" "}
