@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase-config";
+import { auth, db } from "../firebase-config";
 
 const HotProduct = () => {
   const [data, setData] = useState([]);

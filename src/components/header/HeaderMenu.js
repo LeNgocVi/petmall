@@ -1,5 +1,6 @@
 import React from "react";
 import dropdown from "../../assets/image/drop-down.svg";
+import { Link } from "react-router-dom";
 const HeaderMenu = () => {
   return (
     <div className="header-menu-desktop">
@@ -9,9 +10,11 @@ const HeaderMenu = () => {
             <nav id="main-nav-linklist" className="main-nav text-center">
               <ul className="nav-linklist">
                 <li className="nav-bar-item">
-                  <a href="" className="nav-bar-link">
-                    SHOP BY BRAND
-                  </a>
+                  <Link to="/collection/all">
+                    <a href="" className="nav-bar-link">
+                      SHOP BY BRAND
+                    </a>
+                  </Link>
                 </li>
                 <li className="nav-bar-item">
                   <a href="" className="nav-bar-link">

@@ -7,6 +7,7 @@ import Header from "./components/header/Index";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
+import Collection from "./pages/Collection";
 
 function App() {
   return (
@@ -16,6 +17,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
+
+          <Route path="/collection/:collecId" element={<Collection />} />
+
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
