@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
 import Collection from "./pages/Collection";
+import CartDetail from "./pages/CartDetail";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
 
           <Route path="/collection/:collecId" element={<Collection />} />
 
+          <Route path="/cart" element={<CartDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>

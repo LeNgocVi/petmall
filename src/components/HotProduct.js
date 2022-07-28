@@ -6,6 +6,7 @@ const HotProduct = () => {
   useEffect(() => {
     var a = [];
     db.collection("product")
+      .limit(15)
       .get()
       .then((query) => {
         query.forEach((doc) => {

@@ -12,12 +12,12 @@ const HeaderInner = () => {
           <div className="wrapper-header-nav col-xl-4"></div>
           <div className="wrapper-header-logo col-xl-4 p-lr">
             <div className="wrap-logo text-center">
-              <a href="#">
+              <Link to="/">
                 <img
                   src="https://theme.hstatic.net/1000356051/1000797474/14/logo.png?v=37"
                   alt="PETMALL.VN"
                 />
-              </a>
+              </Link>
             </div>
           </div>
           <div className="wrapper-header-icon col-xl-4 p-lr">
@@ -195,12 +195,12 @@ const HeaderInner = () => {
                         <span id="total-view-cart">0₫</span>
                       </div>
                       <div className="mini-cart_button-container">
-                        <a href="" className="link-to-cart btn-box dark">
+                        <Link to="/cart" className="link-to-cart btn-box dark">
                           Xem giỏ hàng
                           <br></br>
                           <br></br>
                           View cart
-                        </a>
+                        </Link>
                         <a href="" className="link-to-checkout btn-box btnred">
                           Thanh toán
                           <br></br>
