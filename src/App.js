@@ -7,6 +7,7 @@ import Header from "./components/header/Index";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
 import SignUp from "./pages/SignUp";
+import Collection from "./pages/Collection";
 import CartDetail from "./pages/CartDetail";
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/signup" element={<SignUp />} />
+
+          <Route path="/collection/:collecId" element={<Collection />} />
+
           <Route path="/cart" element={<CartDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
