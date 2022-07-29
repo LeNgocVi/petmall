@@ -18,9 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<Account />} />
-
           <Route path="/collection/:collecId" element={<Collection />} />
-
           <Route path="/cart" element={<CartDetail />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
