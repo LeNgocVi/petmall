@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   let navigate = useNavigate();
   const [data, setData] = useState("");
-  console.log("data:", data);
+
   const handleSignUp = () => {
     if (data.firstName === "" || data.lastName === "") {
       alert("Please fill firstName and lastName!");
@@ -14,12 +14,12 @@ const SignUp = () => {
       auth
         .createUserWithEmailAndPassword(data.email, data.password)
         .then((userCredentials) => {
-          console.log(userCredentials);
+          // console.log(userCredentials);
           const user = userCredentials.user;
           console.log(user.uid);
 
           const dataUser = {
-            fisrtName: data.fisrtName,
+            firstName: data.firstName,
             lastName: data.lastName,
             gender: data.gender,
             birthday: data.birthday,
@@ -27,12 +27,13 @@ const SignUp = () => {
             password: data.password,
             userID: user.uid,
           };
-          console.log(dataUser.fisrtName);
+
+          console.log(dataUser);
 
           const myDoc = db
             .collection("user")
             .doc(user.uid)
-            .set(dataUser)
+            .set({ dataUser })
             .then(() => {
               console.log("Document successfully written!");
             })
@@ -88,7 +89,7 @@ const SignUp = () => {
             placeholder="Tên"
             className="form-control"
             onChange={(event) =>
-              setData({ ...data, firsrName: event.target.value })
+              setData({ ...data, firstName: event.target.value })
             }
           ></input>
         </div>
@@ -176,7 +177,7 @@ const SignUp = () => {
         <div className="customers-action-account clearfix">
           <div className="action-button">
             <button
-              type="buttton"
+              type="button"
               className="btn btn-box dark"
               onClick={handleSignUp}
             >
