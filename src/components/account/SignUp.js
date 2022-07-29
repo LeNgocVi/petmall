@@ -19,7 +19,7 @@ const SignUp = () => {
           console.log(user.uid);
 
           const dataUser = {
-            fisrtName: data.fisrtName,
+            firstName: data.firstName,
             lastName: data.lastName,
             gender: data.gender,
             birthday: data.birthday,
@@ -27,8 +27,6 @@ const SignUp = () => {
             password: data.password,
             userID: user.uid,
           };
-          console.log(dataUser.fisrtName);
-
           const myDoc = db
             .collection("user")
             .doc(user.uid)
@@ -88,7 +86,7 @@ const SignUp = () => {
             placeholder="Tên"
             className="form-control"
             onChange={(event) =>
-              setData({ ...data, firsrName: event.target.value })
+              setData({ ...data, firstName: event.target.value })
             }
           ></input>
         </div>
@@ -176,7 +174,7 @@ const SignUp = () => {
         <div className="customers-action-account clearfix">
           <div className="action-button">
             <button
-              type="buttton"
+              type="button"
               className="btn btn-box dark"
               onClick={handleSignUp}
             >
