@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 const SignUp = () => {
   let navigate = useNavigate();
   const [data, setData] = useState("");
-  console.log("data:", data);
+
   const handleSignUp = () => {
     if (data.firstName === "" || data.lastName === "") {
       alert("Please fill firstName and lastName!");
@@ -14,7 +14,7 @@ const SignUp = () => {
       auth
         .createUserWithEmailAndPassword(data.email, data.password)
         .then((userCredentials) => {
-          console.log(userCredentials);
+          // console.log(userCredentials);
           const user = userCredentials.user;
           console.log(user.uid);
 
@@ -27,10 +27,13 @@ const SignUp = () => {
             password: data.password,
             userID: user.uid,
           };
+
+          console.log(dataUser);
+
           const myDoc = db
             .collection("user")
             .doc(user.uid)
-            .set(dataUser)
+            .set({ dataUser })
             .then(() => {
               console.log("Document successfully written!");
             })
