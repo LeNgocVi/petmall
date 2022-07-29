@@ -2043,3 +2043,15 @@ textarea.form-control {
   font-size: 16px;
   color: #44709d;
 }
+
+.wrapbox-content-account .userbox h1,
+.wrapbox-content-account .userbox h2 {
+  font-size: 26px;
+  margin: 0 0 32px;
+  font-weight: 600;
+}
+
+/* Login */
+.wrapbox-content-account .register--password {
+  color: #959898;
+}
