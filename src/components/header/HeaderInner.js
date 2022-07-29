@@ -135,7 +135,9 @@ const HeaderInner = () => {
                             <p className="mb-0">
                               Quên mật khẩu?{" "}
                               <button className="link-accented link">
-                                Khôi phục mật khẩu
+                                <Link to="/forgot" className="link">
+                                  Khôi phục mật khẩu
+                                </Link>
                               </button>
                             </p>
                           </div>
