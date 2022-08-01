@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import { auth, db } from "../firebase-config";
 import { useNavigate } from "react-router-dom";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import SignUp from "../components/account/SignUp";
+
 import SignIn from "../components/account/SignIn";
 import ForgotPassword from "../components/account/ForgotPassword";
+import SignUp from "../components/account/SignUp";
 
 const Account = () => {
   return (

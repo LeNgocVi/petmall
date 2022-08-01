@@ -65,9 +65,18 @@ body {
   margin: 0 !important;
 }
 
+.p-2 {
+  padding: 0.5rem !important;
+}
+
 .mb-0,
 .my-0 {
   margin-bottom: 0 !important;
+}
+
+.mr-2,
+.mx-2 {
+  margin-right: 0.5rem !important;
 }
 
 .mb-2,
@@ -185,6 +194,10 @@ body {
 
 .d-inline-block {
   display: inline-block !important;
+}
+
+.position-relative {
+  position: relative !important;
 }
 
 .d-block {
@@ -2054,4 +2067,72 @@ textarea.form-control {
 /* Login */
 .wrapbox-content-account .register--password {
   color: #959898;
+}
+
+/* tài khoản của bạn */
+.layout-info-account .title-info-account h1:after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 30px auto;
+  background: #252a2b;
+}
+
+@media (min-width: 768px) {
+  .col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+@media (min-width: 768px) {
+  .col-md-9 {
+    -ms-flex: 0 0 75%;
+    flex: 0 0 75%;
+    max-width: 75%;
+  }
+}
+
+.account-title {
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.account-list>ul>li>a {
+  padding: 5px 0;
+}
+
+.account-list>ul>li>a:before {
+  content: "\f192";
+  font-family: "FontAwesome";
+  font-size: 8px;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: 2px;
+}
+
+.title-detail {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #44709d;
+  border-bottom: 1px solid #ededed;
+}
+
+#view_address {
+  font-weight: 500;
+  opacity: 0.8;
+  text-decoration: underline;
+  margin: 5px 0;
+  display: inline-block;
+}
+
+.wrap-order-table {
+  background: #d9edf7;
+}
+
+.wrap-order-table .customers-order-bg {
+  background: #fff;
 }

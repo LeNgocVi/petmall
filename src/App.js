@@ -10,6 +10,7 @@ import Collection from "./pages/Collection";
 import CartDetail from "./pages/CartDetail";
 import Account from "./pages/Account";
 import DetailProduct from "./components/detailProduct/DetailProduct";
+import User from "./pages/User";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/*" element={<Account />} />
+          <Route path="user/*" element={<User />} />
           <Route path="/collection/:collecId" element={<Collection />} />
           <Route path="/products/:productId" element={<DetailProduct />} />
           <Route path="/cart" element={<CartDetail />} />
