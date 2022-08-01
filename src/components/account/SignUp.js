@@ -47,7 +47,7 @@ const SignUp = () => {
   useEffect(() => {
     const userCurrent = auth.onAuthStateChanged((user) => {
       if (user) {
-        navigate(`/`);
+        navigate(`/user/`);
       }
     });
 

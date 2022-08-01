@@ -1,7 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
+import { auth, db } from "../../firebase-config";
 const SignIn = () => {
+  let navigate = useNavigate();
+  const [data, setData] = useState("");
+
+  const handleLogin = () => {
+    auth
+      .signInWithEmailAndPassword(data.email, data.password)
+      .then((userCredentials) => {
+        const user = userCredentials.user;
+        // console.log("users:", user);
+      })
+      .catch((error) => alert(error.message));
+  };
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate(`/user/`);
+      }
+    });
+
+    return unsub;
+  }, []);
   return (
     <div id="login" className="customers-account">
       <div className="account-type text-center">
@@ -20,6 +42,9 @@ const SignIn = () => {
             type="email"
             placeholder="Email"
             className="form-control"
+            onChange={(event) =>
+              setData({ ...data, email: event.target.value })
+            }
           ></input>
         </div>
         <div className="form-group mb-4 clearfix">
@@ -34,6 +59,9 @@ const SignIn = () => {
             type="password"
             placeholder="Mật khẩu"
             className="form-control"
+            onChange={(event) =>
+              setData({ ...data, password: event.target.value })
+            }
           ></input>
         </div>
         <div className="sitebox-recaptcha mb-4">
@@ -42,7 +70,11 @@ const SignIn = () => {
         </div>
         <div className="customers-action-account text-center">
           <div className="action-button">
-            <button type="buttton" className="btn btn-box dark">
+            <button
+              type="button"
+              className="btn btn-box dark"
+              onClick={handleLogin}
+            >
               Đăng nhập
             </button>
           </div>
