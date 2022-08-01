@@ -20,7 +20,7 @@ function CollectionHeader(props) {
           </li>
           <li class="liCollection">
             <a href="#about">
-              <b>g</b>
+              <b>tất cả các sản phẩm</b>
             </a>
           </li>
         </ul>

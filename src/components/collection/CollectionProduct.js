@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { auth, db } from "../../firebase-config";
 
 const CollectionProduct = () => {
@@ -29,30 +30,32 @@ const CollectionProduct = () => {
         <div className="row">
           {data.map((note, index) => (
             <div className="col-6 col-md-3 col-lg-3 product-loop" key={index}>
-              <div className="product-inner">
-                <div className="product-image">
-                  <a href="" className="aspect-ratio">
-                    <img src={note.avatar} alt="" />
-                  </a>
-                </div>
-                <div className="product-detail">
-                  <div className="box-pro-detail">
-                    <h3 className="pro-name">
-                      <a href="" className="link">
-                        {note.name}
-                      </a>
-                    </h3>
-                    <div className="box-pro-prices">
-                      <span className="pro-price">
-                        {new Intl.NumberFormat("vi-VN", {
-                          style: "currency",
-                          currency: "VND",
-                        }).format(note.price)}{" "}
-                      </span>
+              <Link to={`/products/${note.price}`}>
+                <div className="product-inner">
+                  <div className="product-image">
+                    <a href="" className="aspect-ratio">
+                      <img src={note.avatar} alt="" />
+                    </a>
+                  </div>
+                  <div className="product-detail">
+                    <div className="box-pro-detail">
+                      <h3 className="pro-name">
+                        <a href="" className="link">
+                          {note.name}
+                        </a>
+                      </h3>
+                      <div className="box-pro-prices">
+                        <span className="pro-price">
+                          {new Intl.NumberFormat("vi-VN", {
+                            style: "currency",
+                            currency: "VND",
+                          }).format(note.price)}{" "}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
           ))}
         </div>
