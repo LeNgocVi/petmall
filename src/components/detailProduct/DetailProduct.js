@@ -1,20 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CollectionHeader from "../collection/CollectionHeader";
 import Description from "./Description";
 import ReturnPolicy from "./ReturnPolicy";
 import PrivacyPolicy from "./PrivacyPolicy";
 import Custumer from "./Custumer";
-
+import { Routes, Route, useParams } from "react-router-dom";
+import { auth, db } from "../../firebase-config";
 function DetailProduct() {
+  const [data, setData] = useState("");
+  let params = useParams();
+  console.log(params.productId);
+
+  const [amount, setAmount] = useState(1);
+
+  function minusQuantity() {
+    if (amount > 0) {
+      setAmount(amount - 1);
+    }
+  }
+  function plusQuantity() {
+    setAmount(amount + 1);
+  }
+  useEffect(() => {
+    if (params.productId) {
+      var a = [];
+      db.collection("product")
+        .doc(params.productId)
+        .get()
+        .then((doc) => {
+          setData(doc.data());
+          console.log(doc.data());
+        });
+    }
+  }, []);
   return (
     <div>
       <CollectionHeader />
       <div class="detailContainer">
         <div class="detailContainerLeft">
-          <img
-            src="https://product.hstatic.net/1000356051/product/1_01aa049c55d74a6a86b4710b16531770_master.png"
-            style={{ marginBottom: "40px" }}
-          />{" "}
+          <img src={data.avatar} style={{ marginBottom: "40px" }} />{" "}
           <Description />
           <ReturnPolicy />
           <PrivacyPolicy />
@@ -24,16 +48,13 @@ function DetailProduct() {
             <div class="product-container-detail stickyProduct-detail">
               <div class="product-content-summary2">
                 <div class="product-heading mb-3">
-                  <h1>
-                    Gel dinh dưỡng GimCat Relax Paste (Anti-stress) 50g - Giảm
-                    căng thẳng Petmall 2022
-                  </h1>
+                  <h1>{data.name}</h1>
 
                   <span class="pro-soldold"></span>
                   <span id="pro_vandor">
                     <strong>BY:</strong>{" "}
                     <a title="Show vendor" href="/collections/vendors?q=gimcat">
-                      Gimcat
+                      {data.producer}
                     </a>
                   </span>
                 </div>
@@ -41,7 +62,12 @@ function DetailProduct() {
                   id="price-preview"
                   class="product-price d-flex align-items-center py-3 mb-3"
                 >
-                  <span class="pro-price">192,000₫</span>
+                  <span class="pro-price">
+                    {new Intl.NumberFormat("vi-VN", {
+                      style: "currency",
+                      currency: "VND",
+                    }).format(data.price)}{" "}
+                  </span>
                 </div>
                 <div class="product-variants mb-md-3">
                   <form
@@ -73,14 +99,14 @@ function DetailProduct() {
                         <input
                           type="button"
                           value="-"
-                          // onclick="minusQuantity()"
+                          onClick={minusQuantity}
                           class="qty-btn"
                         />
                         <input
                           type="text"
                           id="quantity"
                           name="quantity"
-                          value="1"
+                          value={amount}
                           min="1"
                           class="quantity-selector-input"
                           aria-label="Quantity input"
@@ -88,7 +114,7 @@ function DetailProduct() {
                         <input
                           type="button"
                           value="+"
-                          // onclick="plusQuantity()"
+                          onClick={plusQuantity}
                           class="qty-btn"
                         />
                       </div>
@@ -149,6 +175,7 @@ function DetailProduct() {
                   </div>
                 </div> */}
               </div>
+              {/* ))} */}
             </div>
           </div>
           <div></div>

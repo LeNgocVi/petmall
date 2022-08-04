@@ -11,7 +11,7 @@ const CollectionProduct = () => {
       .then((query) => {
         query.forEach((doc) => {
           const data1 = doc.data();
-          console.log(doc.data());
+
           data1.id = doc.id;
 
           a.push(data1);
@@ -30,7 +30,7 @@ const CollectionProduct = () => {
         <div className="row">
           {data.map((note, index) => (
             <div className="col-6 col-md-3 col-lg-3 product-loop" key={index}>
-              <Link to={`/products/${note.price}`}>
+              <Link to={`/products/${note.id}`}>
                 <div className="product-inner">
                   <div className="product-image">
                     <a href="" className="aspect-ratio">
