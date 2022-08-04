@@ -26,7 +26,7 @@ const Cart = () => {
                         in your shopping cart
                       </div>
                       <div className="table-cart">
-                        <div className="list-item-cart">
+                        {/* <div className="list-item-cart">
                           <div className="line-item-container">
                             <div className="line-item media">
                               <div className="line-item-image_wrapper mr-3">
@@ -91,7 +91,7 @@ const Cart = () => {
                               </div>
                             </div>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="list-item-cart">
                           <div className="line-item-container">
                             <div className="line-item media">

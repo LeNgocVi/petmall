@@ -147,6 +147,7 @@ const HeaderInner = () => {
                   </div>
                 </div>
               </div>
+
               <div className="wrap-cart header-action">
                 <a
                   href=""
