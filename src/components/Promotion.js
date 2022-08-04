@@ -12,8 +12,8 @@ const Promotion = () => {
       .then((query) => {
         query.forEach((doc) => {
           const data1 = doc.data();
-          console.log(doc.data());
-          data1.id = doc.id;
+          // console.log(doc.data());
+          // data1.id = doc.id;
           a.push(data1);
         });
       })

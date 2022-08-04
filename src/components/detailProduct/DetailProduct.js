@@ -3,23 +3,35 @@ import CollectionHeader from "../collection/CollectionHeader";
 import Description from "./Description";
 import ReturnPolicy from "./ReturnPolicy";
 import PrivacyPolicy from "./PrivacyPolicy";
+import { addCart } from "../../app/Slice/cartSlice";
 import Custumer from "./Custumer";
 import { Routes, Route, useParams } from "react-router-dom";
 import { auth, db } from "../../firebase-config";
+
+import { useDispatch } from "react-redux";
+
 function DetailProduct() {
+  const dispatch = useDispatch();
   const [data, setData] = useState("");
   let params = useParams();
-  console.log(params.productId);
-
-  const [amount, setAmount] = useState(1);
 
   function minusQuantity() {
-    if (amount > 0) {
-      setAmount(amount - 1);
+    if (data.amount > 0) {
+      setData({ ...data, amount: data.amount - 1 });
     }
   }
+
+  async function addCarts() {
+    if (data != "") {
+      const action = addCart(data);
+      const actionResult = await dispatch(action);
+    } else {
+      alert("fields cannot be left blank");
+    }
+  }
+
   function plusQuantity() {
-    setAmount(amount + 1);
+    setData({ ...data, amount: data.amount + 1 });
   }
   useEffect(() => {
     if (params.productId) {
@@ -28,8 +40,9 @@ function DetailProduct() {
         .doc(params.productId)
         .get()
         .then((doc) => {
-          setData(doc.data());
-          console.log(doc.data());
+          const data1 = doc.data();
+          data1.amount = 1;
+          setData(data1);
         });
     }
   }, []);
@@ -106,7 +119,7 @@ function DetailProduct() {
                           type="text"
                           id="quantity"
                           name="quantity"
-                          value={amount}
+                          value={data.amount}
                           min="1"
                           class="quantity-selector-input"
                           aria-label="Quantity input"
@@ -124,6 +137,7 @@ function DetailProduct() {
                           id="add-to-cart"
                           class=" add-to-cartProduct btn-box btnred add-toCart"
                           name="add"
+                          onClick={addCarts}
                         >
                           Thêm vào giỏ{" "}
                         </button>
