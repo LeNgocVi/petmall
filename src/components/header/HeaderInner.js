@@ -165,6 +165,7 @@ const HeaderInner = () => {
                     <div className="mini-cart_alert-wrapper">
                       <p className="title-box">Giỏ hàng | Cart</p>
                     </div>
+
                     <div className="mini-cart_inner">
                       <div className="mini-cart_content">
                         <div className="mini-cart_scroll">
@@ -191,6 +192,44 @@ const HeaderInner = () => {
                         </div>
                       </div>
                     </div>
+                    <div className="mini-cart_inner">
+                      <div className="mini-cart_content">
+                        <div className="mini-cart_scroll">
+                          <div
+                            id="cart-view"
+                            className="mini-cart_line-item-list"
+                          >
+                            <div className="mini-cart_line-item">
+                              <div className="mini-cart_image-wrapper">
+                                <a className="d-block">
+                                  <img src="https://product.hstatic.net/1000356051/product/1_90ee607f90eb4c76802a26cbf6aed0a3_small.png"></img>
+                                </a>
+                              </div>
+                              <div className="mini-cart_item-wrapper">
+                                <a className="mini-cart_product-title link">
+                                  Đồ chơi KONG Squeezz Crackle Ball for Dogs
+                                  Large Size - Hỗ trợ vận động Petmall
+                                </a>
+                                <span className="mini-cart_product-variant"></span>
+                                <span className="mini-cart_product-quantity">
+                                  1
+                                </span>
+                                <span className="mini-cart_product-price">
+                                  311,000₫
+                                </span>
+                                <span className="mini-cart_product-remove-item">
+                                  <a className="d-block">
+                                    <i class="fa-solid fa-xmark"></i>
+                                    
+                                  </a>
+                                </span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                     <div className="mini-cart_total-recap">
                       <div className="mini-cart_price-total-line">
                         <span>TỔNG TIỀN | Subtotal :</span>
