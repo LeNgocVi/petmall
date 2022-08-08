@@ -31,6 +31,7 @@ function CartDetail({ cart }) {
     const action = deleteCart(idCart);
     const actionResult = await dispatch(action);
   }
+
   const [note, setNote] = useState({
     amount: cart.amount,
     animal: cart.animal,
