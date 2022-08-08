@@ -4,8 +4,30 @@ import iconsearch from "../../assets/image/icon-search.svg";
 import searchbtn from "../../assets/image/search-btn.svg";
 import iconaccount from "../../assets/image/icon-account.svg";
 import cart from "../../assets/image/icon-cart.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import {
+  addCart,
+  getCart,
+  updateCart,
+  deleteCart,
+} from "../../app/Slice/cartSlice";
+
 const HeaderInner = () => {
   const [showSearch, setShowSearch] = useState(false);
+
+  let total = 0;
+  const dispatch = useDispatch();
+  const arrcart = useSelector((state) => state.cart.current);
+
+  arrcart.map((cart, index) => (total = total + cart.amount));
+
+  async function deleteCa(idCart) {
+    console.log("xóa");
+    const action = deleteCart(idCart);
+    const actionResult = await dispatch(action);
+  }
+
   const hanldeSearch = () => {
     if (showSearch === false) {
       setShowSearch(true);
@@ -193,7 +215,7 @@ const HeaderInner = () => {
                   <span className="box-action-icon">
                     <img src={cart} alt="" />
                     <span className="count-holder">
-                      <span className="count">0</span>
+                      <span className="count">{total}</span>
                     </span>
                   </span>
                 </a>
@@ -204,72 +226,82 @@ const HeaderInner = () => {
                         <p className="title-box">Giỏ hàng | Cart</p>
                       </div>
 
-                      <div className="mini-cart_inner">
-                        <div className="mini-cart_content">
-                          <div className="mini-cart_scroll">
-                            <div className="mini-cart_line-item-list">
-                              <div className="mini-cart_empty-state">
-                                <img
-                                  src="./assets/image/cart.svg"
-                                  alt=""
-                                  height="65px"
-                                  width="65px"
-                                />
-                                <p className="m-0">
-                                  Hiện chưa có sản phẩm
-                                  <br></br>
-                                  Your cart is empty
-                                  <br></br>
-                                  <br></br>
-                                  Miễn phí vận chuyển đơn hàng 399k
-                                  <br></br>
-                                  Free delivery with order 399k
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mini-cart_inner">
-                        <div className="mini-cart_content">
-                          <div className="mini-cart_scroll">
-                            <div
-                              id="cart-view"
-                              className="mini-cart_line-item-list"
-                            >
-                              <div className="mini-cart_line-item">
-                                <div className="mini-cart_image-wrapper">
-                                  <a className="d-block">
-                                    <img src="https://product.hstatic.net/1000356051/product/1_90ee607f90eb4c76802a26cbf6aed0a3_small.png"></img>
-                                  </a>
-                                </div>
-                                <div className="mini-cart_item-wrapper">
-                                  <a className="mini-cart_product-title link">
-                                    Đồ chơi KONG Squeezz Crackle Ball for Dogs
-                                    Large Size - Hỗ trợ vận động Petmall
-                                  </a>
-                                  <span className="mini-cart_product-variant"></span>
-                                  <span className="mini-cart_product-quantity">
-                                    1
-                                  </span>
-                                  <span className="mini-cart_product-price">
-                                    311,000₫
-                                  </span>
-                                  <span className="mini-cart_product-remove-item">
-                                    <a className="d-block">
-                                      <i class="fa-solid fa-xmark"></i>
-                                    </a>
-                                  </span>
+                      {arrcart.length == 0 ? (
+                        <div className="mini-cart_inner">
+                          <div className="mini-cart_content">
+                            <div className="mini-cart_scroll">
+                              <div className="mini-cart_line-item-list">
+                                <div className="mini-cart_empty-state">
+                                  <img
+                                    src="./assets/image/cart.svg"
+                                    alt=""
+                                    height="65px"
+                                    width="65px"
+                                  />
+                                  <p className="m-0">
+                                    Hiện chưa có sản phẩm
+                                    <br></br>
+                                    Your cart is empty
+                                    <br></br>
+                                    <br></br>
+                                    Miễn phí vận chuyển đơn hàng 399k
+                                    <br></br>
+                                    Free delivery with order 399k
+                                  </p>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                      </div>
-
+                      ) : (
+                        arrcart.map((cart, index) => (
+                          <div className="mini-cart_inner" key={index}>
+                            <div className="mini-cart_content">
+                              <div className="mini-cart_scroll">
+                                <div
+                                  id="cart-view"
+                                  className="mini-cart_line-item-list"
+                                >
+                                  <div className="mini-cart_line-item">
+                                    <div className="mini-cart_image-wrapper">
+                                      <a className="d-block">
+                                        <img src={cart.avatar}></img>
+                                      </a>
+                                    </div>
+                                    <div className="mini-cart_item-wrapper">
+                                      <a className="mini-cart_product-title link">
+                                        {cart.name}
+                                      </a>
+                                      <span className="mini-cart_product-variant"></span>
+                                      <span className="mini-cart_product-quantity">
+                                        {cart.amount}
+                                      </span>
+                                      <span className="mini-cart_product-price">
+                                        {new Intl.NumberFormat("vi-VN", {
+                                          style: "currency",
+                                          currency: "VND",
+                                        }).format(cart.price)}{" "}
+                                      </span>
+                                      <span className="mini-cart_product-remove-item">
+                                        <a className="d-block">
+                                          <i
+                                            class="fa-solid fa-xmark"
+                                            onClick={() => deleteCa(cart.idD)}
+                                          ></i>
+                                        </a>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))
+                      )}
                       <div className="mini-cart_total-recap">
                         <div className="mini-cart_price-total-line">
                           <span>TỔNG TIỀN | Subtotal :</span>
+
                           <span id="total-view-cart">0₫</span>
                         </div>
                         <div className="mini-cart_button-container">

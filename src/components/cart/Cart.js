@@ -1,6 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, getCart, updateCart } from "../../app/Slice/cartSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
+import CartDetail from "./CartDetail";
+import { auth, db } from "../../firebase-config";
 
 const Cart = () => {
+  const dispatch = useDispatch();
+  const arrcart = useSelector((state) => state.cart.current);
+
+  async function getCarts() {
+    console.log("ok ko");
+    const action = getCart();
+    const actionResult = await dispatch(action);
+    const currentUser = unwrapResult(actionResult);
+  }
+
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((user) => {
+      if (user) {
+        if (arrcart != []) {
+          getCarts();
+        }
+      }
+    });
+
+    return unsub;
+  }, []);
   return (
     <div className="layoutPage-cart mt-4 pb-5">
       <div className="container-fluid">
@@ -26,138 +52,9 @@ const Cart = () => {
                         in your shopping cart
                       </div>
                       <div className="table-cart">
-                        {/* <div className="list-item-cart">
-                          <div className="line-item-container">
-                            <div className="line-item media">
-                              <div className="line-item-image_wrapper mr-3">
-                                <a className="d-block">
-                                  <img src="https://product.hstatic.net/1000356051/product/1_6b67e4cc257747d1a034b3baddc0acab_compact.png"></img>
-                                </a>
-                              </div>
-                              <div className="line-item-product_body media-body">
-                                <div className="line-item_title mb-1 pr-4">
-                                  <a className="d-inline-block">
-                                    <h3 className="mb-0 font-weight-bold">
-                                      Đồ chơi ROGZ by Kong Grinz Treat Ball
-                                      Small Size - Hỗ trợ vận động, có thể nhét
-                                      treats Petmall{" "}
-                                    </h3>
-                                  </a>
-                                </div>
-                                <div className="line-item_vairant mb-2"></div>
-                                <div className="line-item_price mb-2">
-                                  <span className="price">
-                                    <strong>211,000₫</strong>
-                                  </span>
-                                </div>
-                                <div className="line-item_quantity product-quantity qty-click d-inline-block">
-                                  <button
-                                    type="button"
-                                    className="qtyminus qty-btn border float-left"
-                                  >
-                                    -
-                                  </button>
-                                  <input
-                                    type="text"
-                                    size="4"
-                                    min="1"
-                                    value="1"
-                                    id="updates_1089040025"
-                                    className="item-quantity float-left text-center border border-right-0 border-left-0"
-                                  ></input>
-                                  <button
-                                    type="button"
-                                    className="qtyplus qty-btn border float-left"
-                                  >
-                                    +
-                                  </button>
-                                </div>
-                                <div className="line-item_price-total float-md-right mt-2 mt-md-0">
-                                  <p className="m-0">
-                                    <span className="text font-weight-normal">
-                                      Thành tiền | Subtotal :
-                                    </span>
-                                    <span className="line-item-total font-weight-bold">
-                                      211,000₫
-                                    </span>
-                                  </p>
-                                </div>
-                                <a
-                                  className="line-item_remove-item-cart"
-                                  title="Xóa sản phẩm này"
-                                >
-                                  <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div> */}
-                        <div className="list-item-cart">
-                          <div className="line-item-container">
-                            <div className="line-item media">
-                              <div className="line-item-image_wrapper mr-3">
-                                <a className="d-block">
-                                  <img src="https://product.hstatic.net/1000356051/product/1_6b67e4cc257747d1a034b3baddc0acab_compact.png"></img>
-                                </a>
-                              </div>
-                              <div className="line-item-product_body media-body">
-                                <div className="line-item_title mb-1 pr-4">
-                                  <a className="d-inline-block">
-                                    <h3 className="mb-0 font-weight-bold">
-                                      Đồ chơi ROGZ by Kong Grinz Treat Ball
-                                      Small Size - Hỗ trợ vận động, có thể nhét
-                                      treats Petmall{" "}
-                                    </h3>
-                                  </a>
-                                </div>
-                                <div className="line-item_vairant mb-2"></div>
-                                <div className="line-item_price mb-2">
-                                  <span className="price">
-                                    <strong>211,000₫</strong>
-                                  </span>
-                                </div>
-                                <div className="line-item_quantity product-quantity qty-click d-inline-block">
-                                  <button
-                                    type="button"
-                                    className="qtyminus qty-btn border float-left"
-                                  >
-                                    -
-                                  </button>
-                                  <input
-                                    type="text"
-                                    size="4"
-                                    min="1"
-                                    value="1"
-                                    id="updates_1089040025"
-                                    className="item-quantity float-left text-center border border-right-0 border-left-0"
-                                  ></input>
-                                  <button
-                                    type="button"
-                                    className="qtyplus qty-btn border float-left"
-                                  >
-                                    +
-                                  </button>
-                                </div>
-                                <div className="line-item_price-total float-md-right mt-2 mt-md-0">
-                                  <p className="m-0">
-                                    <span className="text font-weight-normal">
-                                      Thành tiền | Subtotal :
-                                    </span>
-                                    <span className="line-item-total font-weight-bold">
-                                      211,000₫
-                                    </span>
-                                  </p>
-                                </div>
-                                <a
-                                  className="line-item_remove-item-cart"
-                                  title="Xóa sản phẩm này"
-                                >
-                                  <i class="fa-solid fa-trash-can"></i>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        {arrcart.map((carts, index) => (
+                          <CartDetail key={index} cart={carts} />
+                        ))}
                       </div>
                     </div>
                     <div className="reponsive-cart-noted mt-4">
