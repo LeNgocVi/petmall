@@ -33,7 +33,7 @@ const CartSlice = createSlice({
     current: [],
   },
   reducers: {
-    addCart: (state, action) => {
+    getCart: (state, action) => {
       // const newPhoto = action.payload;
       state.push(action.payload);
       console.log(action.payload);
