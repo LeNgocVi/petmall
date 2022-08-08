@@ -17,10 +17,15 @@ const HeaderInner = () => {
   const [showSearch, setShowSearch] = useState(false);
 
   let total = 0;
+  let totalPrice = 0;
   const dispatch = useDispatch();
   const arrcart = useSelector((state) => state.cart.current);
 
   arrcart.map((cart, index) => (total = total + cart.amount));
+
+  arrcart.map(
+    (cart, index) => (totalPrice = totalPrice + cart.amount * cart.price)
+  );
 
   async function deleteCa(idCart) {
     console.log("xóa");
@@ -302,7 +307,12 @@ const HeaderInner = () => {
                         <div className="mini-cart_price-total-line">
                           <span>TỔNG TIỀN | Subtotal :</span>
 
-                          <span id="total-view-cart">0₫</span>
+                          <span id="total-view-cart">
+                            {new Intl.NumberFormat("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(totalPrice)}{" "}
+                          </span>
                         </div>
                         <div className="mini-cart_button-container">
                           <Link
