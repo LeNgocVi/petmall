@@ -15,7 +15,6 @@ const HeaderInner = () => {
   const arrcart = useSelector((state) => state.cart.current);
 
   useEffect(() => {
-    let a = 0;
     arrcart.map((item) => {
       setAmountPro(amountPro + item.amount);
     });

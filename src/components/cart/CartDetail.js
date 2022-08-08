@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
 import { addCart, getCart, updateCart } from "../../app/Slice/cartSlice";
 import { auth, db } from "../../firebase-config";
 function CartDetail({ cart }) {
   function minusQuantity() {
     if (note.amount > 1) {
-      setNote({ ...note, amount: note.amount - 1 });
+      setNote({ ...note, amount: note.amount - 1 }).then();
     }
   }
 
