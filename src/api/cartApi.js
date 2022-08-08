@@ -1,12 +1,7 @@
 import { auth, db } from "../firebase-config";
 const cartApi = {
   getCart: () => {
-    // TODO: Call API to get current user
     return new Promise((resolve, reject) => {
-      // reject(new Error('MY CUSTOM ERROR'));
-      // return;
-
-      // Wait 500ms --> return result
       setTimeout(() => {
         const currentUser = auth.currentUser;
         var a = [];
@@ -18,7 +13,8 @@ const cartApi = {
           .then((query) => {
             query.forEach((doc) => {
               const data1 = doc.data();
-              data1.id = doc.id;
+              data1.idD = doc.id;
+
               a.push(data1);
             });
 
@@ -28,12 +24,7 @@ const cartApi = {
     });
   },
   addCart: (newCart) => {
-    // TODO: Call API to get current user
     return new Promise((resolve, reject) => {
-      // reject(new Error('MY CUSTOM ERROR'));
-      // return;
-
-      // Wait 500ms --> return result
       setTimeout(() => {
         const currentUser = auth.currentUser;
         var a = [];
@@ -51,7 +42,7 @@ const cartApi = {
               .then((query) => {
                 query.forEach((doc) => {
                   const data1 = doc.data();
-                  data1.id = doc.id;
+                  data1.idD = doc.id;
                   a.push(data1);
                 });
 
@@ -64,21 +55,15 @@ const cartApi = {
   },
 
   updateCart: (Cart) => {
-    // TODO: Call API to get current user
     return new Promise((resolve, reject) => {
-      // reject(new Error('MY CUSTOM ERROR'));
-      // return;
-
-      // Wait 500ms --> return result
       setTimeout(() => {
-        console.log("Cart", Cart.id);
         const currentUser = auth.currentUser;
         var a = [];
         const docRe = db
           .collection("user")
           .doc(currentUser.uid)
           .collection("cart")
-          .doc(Cart.id)
+          .doc(Cart.idD)
           .update(Cart)
           .then((doctt) => {
             const document = db
@@ -89,7 +74,6 @@ const cartApi = {
               .then((query) => {
                 query.forEach((doc) => {
                   const data1 = doc.data();
-                  data1.id = doc.id;
                   a.push(data1);
                 });
 
@@ -101,12 +85,7 @@ const cartApi = {
   },
 
   deleteCart: (Cart) => {
-    // TODO: Call API to get current user
     return new Promise((resolve, reject) => {
-      // reject(new Error('MY CUSTOM ERROR'));
-      // return;
-
-      // Wait 500ms --> return result
       setTimeout(() => {
         const currentUser = auth.currentUser;
         var a = [];
@@ -125,7 +104,6 @@ const cartApi = {
               .then((query) => {
                 query.forEach((doc) => {
                   const data1 = doc.data();
-                  data1.id = doc.id;
                   a.push(data1);
                 });
 

@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import iconsearch from "../../assets/image/icon-search.svg";
 import searchbtn from "../../assets/image/search-btn.svg";
 import iconaccount from "../../assets/image/icon-account.svg";
 import cart from "../../assets/image/icon-cart.svg";
+
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, getCart, updateCart } from "../../app/Slice/cartSlice";
+import { auth, db } from "../../firebase-config";
 const HeaderInner = () => {
+  const dispatch = useDispatch();
+
+  const [amountPro, setAmountPro] = useState(0);
+  const arrcart = useSelector((state) => state.cart.current);
+
+  useEffect(() => {
+    let a = 0;
+    arrcart.map((item) => {
+      setAmountPro(amountPro + item.amount);
+    });
+  }, []);
   return (
     <div className="header-inner">
       <div className="container-fluid">
@@ -157,7 +172,7 @@ const HeaderInner = () => {
                   <span className="box-action-icon">
                     <img src={cart} alt="" />
                     <span className="count-holder">
-                      <span className="count">0</span>
+                      <span className="count">{amountPro}</span>
                     </span>
                   </span>
                 </a>
@@ -221,7 +236,6 @@ const HeaderInner = () => {
                                 <span className="mini-cart_product-remove-item">
                                   <a className="d-block">
                                     <i class="fa-solid fa-xmark"></i>
-                                    
                                   </a>
                                 </span>
                               </div>

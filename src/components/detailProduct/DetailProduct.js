@@ -3,17 +3,25 @@ import CollectionHeader from "../collection/CollectionHeader";
 import Description from "./Description";
 import ReturnPolicy from "./ReturnPolicy";
 import PrivacyPolicy from "./PrivacyPolicy";
-import { addCart } from "../../app/Slice/cartSlice";
+
 import Custumer from "./Custumer";
 import { Routes, Route, useParams } from "react-router-dom";
 import { auth, db } from "../../firebase-config";
-
-import { useDispatch } from "react-redux";
+import { unwrapResult } from "@reduxjs/toolkit";
+import { useDispatch, useSelector } from "react-redux";
+import { addCart, getCart, updateCart } from "../../app/Slice/cartSlice";
 
 function DetailProduct() {
   const dispatch = useDispatch();
   const [data, setData] = useState("");
   let params = useParams();
+  const arrcart = useSelector((state) => state.cart.current);
+  async function getCarts() {
+    // console.log("ok ko");
+    const action = getCart();
+    const actionResult = await dispatch(action);
+    const currentUser = unwrapResult(actionResult);
+  }
 
   function minusQuantity() {
     if (data.amount > 0) {
@@ -22,11 +30,36 @@ function DetailProduct() {
   }
 
   async function addCarts() {
-    if (data != "") {
+    const small_animals = arrcart.filter((animal) => {
+      return animal.id === data.id;
+    });
+
+    if (small_animals.length == 0) {
       const action = addCart(data);
       const actionResult = await dispatch(action);
     } else {
-      alert("fields cannot be left blank");
+      var a = [];
+
+      const dataUser = {
+        amount: small_animals[0].amount + data.amount,
+        animal: small_animals[0].animal,
+        avatar: small_animals[0].avatar,
+        components_of_production: small_animals[0].components_of_production,
+        describe: small_animals[0].describe,
+        id: small_animals[0].id,
+        idD: small_animals[0].idD,
+        name: small_animals[0].name,
+        price: small_animals[0].price,
+        producer: small_animals[0].producer,
+        promotion: small_animals[0].promotion,
+        servicio: small_animals[0].servicio,
+        type_servicio: small_animals[0].type_servicio,
+        user_manual: small_animals[0].user_manual,
+        weight: small_animals[0].weight,
+      };
+
+      const action = updateCart(dataUser);
+      const actionResult = await dispatch(action);
     }
   }
 
@@ -35,6 +68,7 @@ function DetailProduct() {
   }
   useEffect(() => {
     if (params.productId) {
+      getCarts();
       var a = [];
       db.collection("product")
         .doc(params.productId)
@@ -42,6 +76,8 @@ function DetailProduct() {
         .then((doc) => {
           const data1 = doc.data();
           data1.amount = 1;
+          data1.id = doc.id;
+          data1.idD = "";
           setData(data1);
         });
     }
