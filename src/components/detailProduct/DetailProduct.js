@@ -68,7 +68,7 @@ function DetailProduct() {
   }
   useEffect(() => {
     if (params.productId) {
-      getCarts();
+      // getCarts();
       var a = [];
       db.collection("product")
         .doc(params.productId)

@@ -1,18 +1,37 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { addCart, getCart, updateCart } from "../../app/Slice/cartSlice";
+import {
+  addCart,
+  getCart,
+  updateCart,
+  deleteCart,
+} from "../../app/Slice/cartSlice";
 import { auth, db } from "../../firebase-config";
+
 function CartDetail({ cart }) {
-  function minusQuantity() {
-    if (note.amount > 1) {
-      setNote({ ...note, amount: note.amount - 1 }).then();
+  const dispatch = useDispatch();
+
+  async function minusQuantity() {
+    if (cart.amount > 1) {
+      var a = { ...note, amount: cart.amount - 1 };
+      const action = updateCart(a);
+      const actionResult = await dispatch(action);
     }
   }
 
-  function plusQuantity() {
-    setNote({ ...note, amount: note.amount + 1 });
+  async function plusQuantity() {
+    var a = { ...note, amount: cart.amount + 1 };
+    const action = updateCart(a);
+    const actionResult = await dispatch(action);
   }
+
+  async function deleteCa(idCart) {
+    console.log("xóa");
+    const action = deleteCart(idCart);
+    const actionResult = await dispatch(action);
+  }
+
   const [note, setNote] = useState({
     amount: cart.amount,
     animal: cart.animal,
@@ -33,7 +52,6 @@ function CartDetail({ cart }) {
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(cart);
       }
     });
 
@@ -75,7 +93,7 @@ function CartDetail({ cart }) {
                 type="text"
                 size="4"
                 min="1"
-                value={note.amount}
+                value={cart.amount}
                 id="updates_1089040025"
                 className="item-quantity float-left text-center border border-right-0 border-left-0"
               ></input>
@@ -97,13 +115,16 @@ function CartDetail({ cart }) {
                     {new Intl.NumberFormat("vi-VN", {
                       style: "currency",
                       currency: "VND",
-                    }).format(note.amount * note.price)}{" "}
+                    }).format(cart.amount * cart.price)}{" "}
                   </span>
                 </span>
               </p>
             </div>
             <a className="line-item_remove-item-cart" title="Xóa sản phẩm này">
-              <i class="fa-solid fa-trash-can"></i>
+              <i
+                class="fa-solid fa-trash-can"
+                onClick={() => deleteCa(note.idD)}
+              ></i>
             </a>
           </div>
         </div>

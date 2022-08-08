@@ -1,15 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCart, getCart, updateCart } from "../../app/Slice/cartSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 import CartDetail from "./CartDetail";
 import { auth, db } from "../../firebase-config";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const arrcart = useSelector((state) => state.cart.current);
+  let total = 0;
+  let totalPrice = 0;
+
+  arrcart.map((cart, index) => (total = total + cart.amount));
+
+  arrcart.map(
+    (cart, index) => (totalPrice = totalPrice + cart.amount * cart.price)
+  );
+  async function getCarts() {
+    console.log("ok ko");
+    const action = getCart();
+    const actionResult = await dispatch(action);
+    const currentUser = unwrapResult(actionResult);
+  }
+
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((user) => {
       if (user) {
+        if (arrcart != []) {
+          getCarts();
+        }
       }
     });
 
@@ -32,11 +51,15 @@ const Cart = () => {
                     <div className="reponsive-table-cart">
                       <div className="title-count-cart mb-2">
                         Bạn đang có
-                        <span className="font-weight-bold"> 2 sản phẩm </span>
+                        <span className="font-weight-bold">
+                          {total} sản phẩm{" "}
+                        </span>
                         trong giỏ hàng
                         <br></br>
                         You have
-                        <span className="font-weight-bold"> 2 product </span>
+                        <span className="font-weight-bold">
+                          {total} 2 product{" "}
+                        </span>
                         in your shopping cart
                       </div>
                       <div className="table-cart">
@@ -96,7 +119,12 @@ const Cart = () => {
                       <div className="order-total mb-2 font-weight-bold">
                         <p className="m-0 py-3 border-bottom border-top">
                           Tổng tiền | Subtotal :
-                          <span className="font-weight-bold">522,000₫</span>
+                          <span className="font-weight-bold">
+                            {new Intl.NumberFormat("vi-VN", {
+                              style: "currency",
+                              currency: "VND",
+                            }).format(totalPrice)}{" "}
+                          </span>
                         </p>
                       </div>
                       <div className="order-short-description">

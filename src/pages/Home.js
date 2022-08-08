@@ -22,7 +22,6 @@ const Home = () => {
   useEffect(() => {
     const userCurrent = auth.onAuthStateChanged((user) => {
       if (user) {
-        console.log(user.uid);
         getCarts();
       }
     });
