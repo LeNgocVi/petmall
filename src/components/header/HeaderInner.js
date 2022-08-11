@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { auth, db } from "../../firebase-config";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import iconsearch from "../../assets/image/icon-search.svg";
 import searchbtn from "../../assets/image/search-btn.svg";
@@ -17,6 +19,31 @@ import { auth, db } from "../../firebase-config";
 
 const HeaderInner = () => {
   let navigate = useNavigate();
+
+  const [data, setData] = useState("");
+
+  const handleLogin = () => {
+    auth
+      .signInWithEmailAndPassword(data.email, data.password)
+      .then((userCredentials) => {
+        const user1 = userCredentials.user;
+        // console.log("users:", user);
+      })
+      .catch((error) => alert(error.message));
+  };
+
+  const [data1, setData1] = useState([]);
+
+  const handleSignOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigate(`/`);
+        setData1("");
+      })
+      .catch((error) => alert(error.message));
+  };
+
   const [showSearch, setShowSearch] = useState(false);
 
   const [valueSearch, setValueSearch] = useState([]);
@@ -85,6 +112,22 @@ const HeaderInner = () => {
       setShowCart(false);
     }
   };
+  useEffect(() => {
+    const userCurrent = auth.onAuthStateChanged((user) => {
+      if (user) {
+        var a = [];
+        db.collection("user")
+          .doc(user.uid)
+          .get()
+          .then((doc) => {
+            const data2 = doc.data();
+            setData1(data2.dataUser);
+          });
+      }
+    });
+
+    return userCurrent;
+  }, []);
   return (
     <div className="header-inner">
       <div className="container-fluid">
@@ -149,7 +192,7 @@ const HeaderInner = () => {
                     <img src={iconaccount} alt="" />
                   </span>
                 </a>
-                {showAccount ? (
+                {showAccount && (
                   <div
                     id="account-popover"
                     className="header_dropdown_content site_account"
@@ -160,82 +203,139 @@ const HeaderInner = () => {
                           id="header-login-panel"
                           className="popover-panel popover-panel_default is-selected"
                         >
-                          <div className="popover-inner">
-                            <form action="" className="customer_login">
-                              <div className="popover_header">
-                                <h2 className="popover_title">
-                                  Đăng nhập tài khoản <br></br> Your account
-                                </h2>
-                                <p className="popover_legend">
-                                  Theo dõi đơn hàng & khuyến mãi
+                          {data1.length != 0 ? (
+                            <div className="popover-inner">
+                              <form action="" className="customer_login">
+                                <div className="popover_header">
+                                  <h2 className="popover_title">
+                                    Thông tin <br></br> Tài Khoản
+                                  </h2>
+                                </div>
+                                <div className="form-group form-input-wrapper form-input-wrapper_labelled">
+                                  <p>
+                                    Họ và tên: {data1.firstName}{" "}
+                                    {data1.lastName}
+                                  </p>
+                                </div>
+                                <div className="form-group form-input-wrapper form-input-wrapper_labelled">
+                                  <p>Email: {data1.email}</p>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={handleSignOut}
+                                  className="form-submit btn btn-box dark"
+                                >
+                                  Đăng xuất
+                                </button>
+                              </form>
+                              <div className="popover-secondary-action">
+                                <p className="mb-2">
+                                  Khách hàng mới?{" "}
+                                  <Link to="/signup" className="link">
+                                    Tạo tài khoản
+                                  </Link>
+                                </p>
+                                <p className="mb-0">
+                                  Quên mật khẩu?{" "}
+                                  <button className="link-accented link">
+                                    <Link to="/forgot" className="link">
+                                      Khôi phục mật khẩu
+                                    </Link>
+                                  </button>
                                 </p>
                               </div>
-                              <div className="form-group form-input-wrapper form-input-wrapper_labelled">
-                                <input
-                                  type="email"
-                                  id="email"
-                                  name="email"
-                                  className="form-field_text form-control"
-                                  required="required"
-                                />
-                                <label
-                                  for="email"
-                                  className="text-field form-floating_label"
-                                >
-                                  Email
-                                </label>
-                              </div>
-                              <div className="form-group form-input-wrapper form-input-wrapper_labelled">
-                                <input
-                                  type="password"
-                                  id="email"
-                                  name="email"
-                                  className="form-field_text form-control"
-                                  required="required"
-                                />
-                                <label
-                                  for="password"
-                                  className="text-field form-floating_label"
-                                >
-                                  Mật khẩu
-                                </label>
-                              </div>
-                              <div className="sitebox-recaptcha mb-3">
-                                This site is protected by reCAPTCHA and the
-                                Google
-                                <a href="">Privacy Policy</a> and{" "}
-                                <a href="">Terms of Service</a>
-                                apply.
-                              </div>
-                              <button
-                                type="submit"
-                                className="form-submit btn btn-box dark"
-                              >
-                                Đăng nhập
-                              </button>
-                            </form>
-                            <div className="popover-secondary-action">
-                              <p className="mb-2">
-                                Khách hàng mới?{" "}
-                                <Link to="/signup" className="link">
-                                  Tạo tài khoản
-                                </Link>
-                              </p>
-                              <p className="mb-0">
-                                Quên mật khẩu?{" "}
-                                <button className="link-accented link">
-                                  <Link to="/forgot" className="link">
-                                    Khôi phục mật khẩu
-                                  </Link>
-                                </button>
-                              </p>
                             </div>
-                          </div>
+                          ) : (
+                            <div className="popover-inner">
+                              <form action="" className="customer_login">
+                                <div className="popover_header">
+                                  <h2 className="popover_title">
+                                    Đăng nhập tài khoản <br></br> Your account
+                                  </h2>
+                                  <p className="popover_legend">
+                                    Theo dõi đơn hàng & khuyến mãi
+                                  </p>
+                                </div>
+                                <div className="form-group form-input-wrapper form-input-wrapper_labelled">
+                                  <input
+                                    type="email"
+                                    id="email"
+                                    name="email"
+                                    className="form-field_text form-control"
+                                    required="required"
+                                    onChange={(event) =>
+                                      setData({
+                                        ...data,
+                                        email: event.target.value,
+                                      })
+                                    }
+                                  />
+                                  <label
+                                    for="email"
+                                    className="text-field form-floating_label"
+                                  >
+                                    Email
+                                  </label>
+                                </div>
+                                <div className="form-group form-input-wrapper form-input-wrapper_labelled">
+                                  <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    className="form-field_text form-control"
+                                    required="required"
+                                    onChange={(event) =>
+                                      setData({
+                                        ...data,
+                                        password: event.target.value,
+                                      })
+                                    }
+                                  />
+                                  <label
+                                    for="password"
+                                    className="text-field form-floating_label"
+                                  >
+                                    Mật khẩu
+                                  </label>
+                                </div>
+                                <div className="sitebox-recaptcha mb-3">
+                                  This site is protected by reCAPTCHA and the
+                                  Google
+                                  <a href="">Privacy Policy</a> and{" "}
+                                  <a href="">Terms of Service</a>
+                                  apply.
+                                </div>
+                                <button
+                                  type="button"
+                                  className="form-submit btn btn-box dark"
+                                  onClick={handleLogin}
+                                >
+                                  Đăng nhập
+                                </button>
+                              </form>
+                              <div className="popover-secondary-action">
+                                <p className="mb-2">
+                                  Khách hàng mới?{" "}
+                                  <Link to="/signup" className="link">
+                                    Tạo tài khoản
+                                  </Link>
+                                </p>
+                                <p className="mb-0">
+                                  Quên mật khẩu?{" "}
+                                  <button className="link-accented link">
+                                    <Link to="/forgot" className="link">
+                                      Khôi phục mật khẩu
+                                    </Link>
+                                  </button>
+                                </p>
+                              </div>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
-                ) : null}
+                )}
               </div>
 
               <div className="wrap-cart header-action">
