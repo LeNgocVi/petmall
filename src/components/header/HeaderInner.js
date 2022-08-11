@@ -6,15 +6,20 @@ import iconaccount from "../../assets/image/icon-account.svg";
 import cart from "../../assets/image/icon-cart.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
+import { useNavigate } from "react-router-dom";
 import {
   addCart,
   getCart,
   updateCart,
   deleteCart,
 } from "../../app/Slice/cartSlice";
+import { auth, db } from "../../firebase-config";
 
 const HeaderInner = () => {
+  let navigate = useNavigate();
   const [showSearch, setShowSearch] = useState(false);
+
+  const [valueSearch, setValueSearch] = useState([]);
 
   let total = 0;
   let totalPrice = 0;
@@ -28,11 +33,28 @@ const HeaderInner = () => {
   );
 
   async function deleteCa(idCart) {
-    console.log("xóa");
     const action = deleteCart(idCart);
     const actionResult = await dispatch(action);
   }
+  async function CheckOut() {
+    const currentUser = auth.currentUser;
+    arrcart.forEach((element) => {
+      const docRef = db
+        .collection("user")
+        .doc(currentUser.uid)
+        .collection("cart")
+        .doc(element.idD)
+        .delete()
+        .then(console.log("xóanhoa", element.idD));
+    });
+    const action = getCart();
+    const actionResult = await dispatch(action);
+    alert("bạn đã đặt hàng thành công");
+  }
 
+  function Search() {
+    navigate(`/collectionSearch/${valueSearch}`);
+  }
   const hanldeSearch = () => {
     if (showSearch === false) {
       setShowSearch(true);
@@ -99,10 +121,15 @@ const HeaderInner = () => {
                           <input
                             className="searchinput"
                             placeholder="Tìm kiếm sản phẩm..."
+                            onChange={(event) =>
+                              setValueSearch(event.target.value)
+                            }
                           ></input>
                           <button
                             id="search-header-btn-dk"
                             className="btn btn-search"
+                            onClick={Search}
+                            type="button"
                           >
                             <img src={searchbtn} alt="" />
                           </button>
@@ -324,15 +351,15 @@ const HeaderInner = () => {
                             <br></br>
                             View cart
                           </Link>
-                          <a
-                            href=""
+                          <div
                             className="link-to-checkout btn-box btnred"
+                            onClick={CheckOut}
                           >
                             Thanh toán
                             <br></br>
                             <br></br>
                             Checkout
-                          </a>
+                          </div>
                         </div>
                       </div>
                     </div>

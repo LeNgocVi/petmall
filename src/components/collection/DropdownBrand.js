@@ -67,9 +67,6 @@ function Dropdown({ title, items, multiSelect = false }) {
                   name="vehicle1"
                   class="vehicle1"
                   value={item.value}
-                  checked={() => {
-                    selection.has(item.value);
-                  }}
                   onChange={() => handleOnClick(item)}
                 />
                 <p>{item.value}</p>

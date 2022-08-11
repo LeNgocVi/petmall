@@ -5,7 +5,7 @@ import CollectionHeader from "../components/collection/CollectionHeader";
 import "../assets/css/collection.css";
 import DropdownBrand from "../components/collection/DropdownBrand";
 import DropdownPrice from "../components/collection/DropdownPrice";
-import CollectionProduct from "../components/collection/CollectionProduct";
+import CollectionProductSearch from "../components/collection/CollectionProductSearch";
 
 const items = [
   {
@@ -105,7 +105,7 @@ const itemPrice = [
   },
 ];
 
-const Collection = () => {
+const CollectionSearch = () => {
   let params = useParams();
 
   return (
@@ -121,19 +121,15 @@ const Collection = () => {
         <div class="collectionContainerRight">
           <div class="collectionContainerRightHeader">
             <div class="textTittle">
-              {params.collecId == "all" ? (
-                <p>tất cả sản phẩm</p>
-              ) : (
-                <p> sản phẩm của {params.collecId}</p>
-              )}
+              <p> sản phẩm tìm kiếm của {params.collecSearchId}</p>
             </div>
           </div>
           <div>
-            <CollectionProduct item={params.collecId} />
+            <CollectionProductSearch item={params.collecSearchId} />
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default Collection;
+export default CollectionSearch;

@@ -8,20 +8,23 @@ function Dropdown({ title, items, multiSelect = false }) {
   const toggle = () => setOpen(!open);
   Dropdown.handleClickOutside = () => setOpen(false);
 
+  console.log(selection);
+
   function handleOnClick(item) {
-    if (!selection.some((current) => current.id === item.id)) {
-      if (!multiSelect) {
-        setSelection([item]);
-      } else if (multiSelect) {
-        setSelection([...selection, item]);
-      }
-    } else {
-      let selectionAfterRemoval = selection;
-      selectionAfterRemoval = selectionAfterRemoval.filter(
-        (current) => current.id !== item.id
-      );
-      setSelection([...selectionAfterRemoval]);
-    }
+    // if (!selection.some((current) => current.id === item.id)) {
+    //   if (!multiSelect) {
+    //     setSelection([item]);
+    //   } else if (multiSelect) {
+    //     setSelection([...selection, item]);
+    //   }
+    // } else {
+    //   let selectionAfterRemoval = selection;
+    //   selectionAfterRemoval = selectionAfterRemoval.filter(
+    //     (current) => current.id !== item.id
+    //   );
+    //   setSelection([...selectionAfterRemoval]);
+    // }
+    setSelection(item.value);
   }
 
   function isItemInSelection(item) {
@@ -66,7 +69,8 @@ function Dropdown({ title, items, multiSelect = false }) {
                   id="vehicle1"
                   name="vehicle1"
                   class="vehicle1"
-                  value="Bike"
+                  // value={item.value}
+                  checked={selection.value}
                   onClick={() => handleOnClick(item)}
                 />
                 <p>{item.value}</p>

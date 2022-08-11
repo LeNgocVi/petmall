@@ -2,42 +2,29 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { auth, db } from "../../firebase-config";
 
-const CollectionProduct = ({ item }) => {
+const CollectionProductSearch = ({ item }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    if (item == "all") {
-      var a = [];
-      db.collection("product")
-        .get()
-        .then((query) => {
-          query.forEach((doc) => {
-            const data1 = doc.data();
-            data1.id = doc.id;
-            a.push(data1);
-          });
-        })
-        .then(() => {
-          setData(a);
+    var a = [];
+    db.collection("product")
+      .get()
+      .then((query) => {
+        query.forEach((doc) => {
+          const data1 = doc.data();
+          data1.id = doc.id;
+          a.push(data1);
         });
-    } else {
-      if (item != null) {
-        var a = [];
-        db.collection("product")
-          .where("animal", "==", item)
-          .get()
-          .then((query) => {
-            query.forEach((doc) => {
-              const data1 = doc.data();
-              data1.id = doc.id;
-              a.push(data1);
-            });
-          })
-          .then(() => {
-            setData(a);
+      })
+      .then(() => {
+        if (item != null) {
+          const small_animals = a.filter((element) => {
+            return element.name.includes(item);
           });
-      }
-    }
+          console.log(small_animals);
+          setData(small_animals);
+        }
+      });
   }, [item]);
   return (
     <section
@@ -96,4 +83,4 @@ const CollectionProduct = ({ item }) => {
   );
 };
 
-export default CollectionProduct;
+export default CollectionProductSearch;
