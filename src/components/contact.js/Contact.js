@@ -1,5 +1,5 @@
 import React from "react";
-
+import footer from "../../assets/image/footer.jpg";
 const Contact = () => {
   return (
     <footer className="main-footer footer mainfooter-toolbar">
@@ -148,22 +148,13 @@ const Contact = () => {
                 </h4>
                 <div className="footer-block_content footer-block_content-fanpage mb-3">
                   <div className="footer-static-content">
-                    <img
-                      src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/279730739_5218679328219535_942865474666468991_n.jpg?stp=dst-jpg_p130x130&_nc_cat=103&ccb=1-7&_nc_sid=dd9801&_nc_ohc=_vmlAKdPzRsAX9NdjIo&_nc_ht=scontent.fdad1-1.fna&edm=ANcbAXIEAAAA&oh=00_AT_ygmyjUFpyac3mDyvekcUS5VU-b5OXh3ru9PoYdwrweA&oe=62EBBC07"
-                      alt=""
-                    />
+                    <img src={footer} alt="" />
                   </div>
                   <div className="footer-static-content trapckik">
-                    <img
-                      src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/279730739_5218679328219535_942865474666468991_n.jpg?stp=dst-jpg_p130x130&_nc_cat=103&ccb=1-7&_nc_sid=dd9801&_nc_ohc=_vmlAKdPzRsAX9NdjIo&_nc_ht=scontent.fdad1-1.fna&edm=ANcbAXIEAAAA&oh=00_AT_ygmyjUFpyac3mDyvekcUS5VU-b5OXh3ru9PoYdwrweA&oe=62EBBC07"
-                      alt=""
-                    />
+                    <img src={footer} alt="" />
                   </div>
                   <div className="footer-static-content trapckik">
-                    <img
-                      src="https://scontent.fdad1-1.fna.fbcdn.net/v/t39.30808-6/279730739_5218679328219535_942865474666468991_n.jpg?stp=dst-jpg_p130x130&_nc_cat=103&ccb=1-7&_nc_sid=dd9801&_nc_ohc=_vmlAKdPzRsAX9NdjIo&_nc_ht=scontent.fdad1-1.fna&edm=ANcbAXIEAAAA&oh=00_AT_ygmyjUFpyac3mDyvekcUS5VU-b5OXh3ru9PoYdwrweA&oe=62EBBC07"
-                      alt=""
-                    />
+                    <img src={footer} alt="" />
                   </div>
                 </div>
               </div>
