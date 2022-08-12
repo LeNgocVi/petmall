@@ -6,16 +6,15 @@ import iconsearch from "../../assets/image/icon-search.svg";
 import searchbtn from "../../assets/image/search-btn.svg";
 import iconaccount from "../../assets/image/icon-account.svg";
 import cart from "../../assets/image/icon-cart.svg";
+import cart1 from "../../assets/image/cart1.jpg";
 import { useDispatch, useSelector } from "react-redux";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { useNavigate } from "react-router-dom";
 import {
   addCart,
   getCart,
   updateCart,
   deleteCart,
 } from "../../app/Slice/cartSlice";
-import { auth, db } from "../../firebase-config";
 
 const HeaderInner = () => {
   let navigate = useNavigate();
@@ -365,7 +364,7 @@ const HeaderInner = () => {
                               <div className="mini-cart_line-item-list">
                                 <div className="mini-cart_empty-state">
                                   <img
-                                    src="./assets/image/cart.svg"
+                                    src={cart1}
                                     alt=""
                                     height="65px"
                                     width="65px"
