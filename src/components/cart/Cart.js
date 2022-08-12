@@ -17,12 +17,24 @@ const Cart = () => {
     (cart, index) => (totalPrice = totalPrice + cart.amount * cart.price)
   );
   async function getCarts() {
-    console.log("ok ko");
     const action = getCart();
     const actionResult = await dispatch(action);
     const currentUser = unwrapResult(actionResult);
   }
-
+  async function CheckOut() {
+    const currentUser = auth.currentUser;
+    arrcart.forEach((element) => {
+      const docRef = db
+        .collection("user")
+        .doc(currentUser.uid)
+        .collection("cart")
+        .doc(element.idD)
+        .delete();
+    });
+    const action = getCart();
+    const actionResult = await dispatch(action);
+    alert("bạn đã đặt hàng thành công");
+  }
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((user) => {
       if (user) {
@@ -134,7 +146,7 @@ const Cart = () => {
                           You can enter the coupon code at the checkout page
                         </p>
                       </div>
-                      <div className="order-action-checkout">
+                      <div className="order-action-checkout" onClick={CheckOut}>
                         <a className="checkout-btn d-block text-center text-white text-uppercase link">
                           Thanh toán | Checkout
                         </a>
