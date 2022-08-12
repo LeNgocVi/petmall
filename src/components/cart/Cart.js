@@ -58,7 +58,7 @@ const Cart = () => {
                         <br></br>
                         You have
                         <span className="font-weight-bold">
-                          {total} 2 product{" "}
+                          {total} product{" "}
                         </span>
                         in your shopping cart
                       </div>

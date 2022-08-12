@@ -14,7 +14,6 @@ const cartApi = {
             query.forEach((doc) => {
               const data1 = doc.data();
               data1.idD = doc.id;
-
               a.push(data1);
             });
 

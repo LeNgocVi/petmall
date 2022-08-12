@@ -10,30 +10,34 @@ const HeaderMenu = () => {
             <nav id="main-nav-linklist" className="main-nav text-center">
               <ul className="nav-linklist">
                 <li className="nav-bar-item">
-                  <Link to="/collection/all">
+                  <Link to={`/collection/all`}>
                     <a href="" className="nav-bar-link">
                       SHOP BY BRAND
                     </a>
                   </Link>
                 </li>
                 <li className="nav-bar-item">
-                  <a href="" className="nav-bar-link">
-                    CỦA MÈO | CAT
-                    {/* <!-- <i
+                  <Link to="/collection/cat">
+                    <a href="" className="nav-bar-link">
+                      CỦA MÈO | CAT
+                      {/* <!-- <i
                           className="icon--arrow-bottom fa-solid fa-angle-down"
                         ></i> --> */}
-                    <img
-                      className="icon--arrow-bottom"
-                      src={dropdown}
-                      alt=""
-                    ></img>
-                  </a>
+                      <img
+                        className="icon--arrow-bottom"
+                        src={dropdown}
+                        alt=""
+                      ></img>
+                    </a>
+                  </Link>
                   <ul className="dropdown-desktop-menu">
                     <li className="nav-bar-item nav-dropdown-item dropdown-item-lv2">
-                      <a href="" className="nav-dropdown-link">
-                        Thức ăn, dưỡng chất | Food, nutrition
-                        <i className="icon--arrow-right fa-solid fa-angle-right"></i>
-                      </a>
+                      <Link to="/collection/cat/">
+                        <a href="" className="nav-dropdown-link">
+                          Thức ăn, dưỡng chất | Food, nutrition
+                          <i className="icon--arrow-right fa-solid fa-angle-right"></i>
+                        </a>
+                      </Link>
                       <ul className="dropdown-desktop-menu">
                         <li className="nav-bar-item nav-dropdown-item">
                           <a href="" className="nav-dropdown-link">
@@ -92,35 +96,44 @@ const HeaderMenu = () => {
                   </ul>
                 </li>
                 <li className="nav-bar-item">
-                  <a href="" className="nav-bar-link">
-                    CỦA CHÓ | DOG
-                    <img
-                      className="icon--arrow-bottom"
-                      src={dropdown}
-                      alt=""
-                    ></img>
-                  </a>
+                  <Link to="/collection/dog/">
+                    <a href="" className="nav-bar-link">
+                      CỦA CHÓ | DOG
+                      <img
+                        className="icon--arrow-bottom"
+                        src={dropdown}
+                        alt=""
+                      ></img>
+                    </a>
+                  </Link>
                 </li>
                 <li className="nav-bar-item">
-                  <a href="" className="nav-bar-link">
-                    THÚ NHỎ | Small Pet
-                    <img
-                      className="icon--arrow-bottom"
-                      src={dropdown}
-                      alt=""
-                    ></img>
-                  </a>
+                  <Link to="/collection/small pet/">
+                    <a href="" className="nav-bar-link">
+                      THÚ NHỎ | Small Pet
+                      <img
+                        className="icon--arrow-bottom"
+                        src={dropdown}
+                        alt=""
+                      ></img>
+                    </a>
+                  </Link>
+                </li>
+
+                <li className="nav-bar-item">
+                  <Link to="/collection/Today's deals/">
+                    <a href="" className="nav-bar-link">
+                      {" "}
+                      Today's deals{" "}
+                    </a>
+                  </Link>
                 </li>
                 <li className="nav-bar-item">
-                  <a href="" className="nav-bar-link">
-                    {" "}
-                    Today's deals{" "}
-                  </a>
-                </li>
-                <li className="nav-bar-item">
-                  <a href="" className="nav-bar-link">
-                    Pet Parent
-                  </a>
+                  <Link to="/collection/Pet Parent/">
+                    <a href="" className="nav-bar-link">
+                      Pet Parent
+                    </a>
+                  </Link>
                 </li>
               </ul>
             </nav>

@@ -27,6 +27,7 @@ export const deleteCart = createAsyncThunk("Cart/deleteCart", async (Cart) => {
   const currentUser = await cartApi.deleteCart(Cart);
   return currentUser;
 });
+
 const CartSlice = createSlice({
   name: "carts",
   initialState: {
